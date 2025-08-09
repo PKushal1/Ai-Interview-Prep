@@ -1,0 +1,8 @@
+Flask
+dotenv
+google-generativeai
+opencv-python
+mediapipe
+dlib
+scipy
+numpy

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - AI Interview Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /*
+         * Jarvis Style Guide: Creamy & Elegant
+         * A soft, clean design with smooth transitions and a refined color palette.
+         */
+
+        :root {
+            --primary-bg: #F8F0E3;
+            --accent-creamy: #C9A66B;
+            --text-dark: #332E2C;
+            --container-bg: #FFFFFF;
+            --border-radius: 8px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* --- Header & Nav Bar --- */
+        header {
+            background: var(--container-bg);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+            color: var(--accent-creamy);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-creamy);
+        }
+
+        /* Underline hover effect */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-creamy);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            font-family: var(--font-body);
+            background: var(--accent-creamy);
+            color: var(--primary-bg);
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #B2915B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Hero Section --- */
+        .features-hero {
+            padding: 80px 20px;
+            background-image: linear-gradient(135deg, rgba(248, 240, 227, 0.8), rgba(248, 240, 227, 0.5));
+            background-size: 400% 400%;
+            animation: wave-bg 15s ease-in-out infinite;
+        }
+
+        @keyframes wave-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .features-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 6vw, 4rem);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .features-hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- Features Grid --- */
+        .features-grid {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--accent-creamy);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Call to Action --- */
+        .cta-section {
+            padding: 80px 20px;
+            background: var(--container-bg);
+            margin-top: 50px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .cta-section p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-dark);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 20px;
+            background: var(--container-bg);
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+        
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .features-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI Interview Prep</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="login.html" class="btn">Login</a>
+        </nav>
+    </header>
+    
+    <section class="features-hero">
+        <h1>Powerful Features to Master Your Interview</h1>
+        <p>Our platform uses cutting-edge AI to provide you with the tools and insights you need to succeed in any technical or behavioral interview.</p>
+    </section>
+    
+    <main class="features-grid">
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-microphone"></i></div>
+            <h3>Speech-to-Text AI Analysis</h3>
+            <p>Our advanced speech recognition technology accurately transcribes your spoken answers, allowing our AI to analyze every word you say. This helps you identify filler words like "um," "uh," and "like" to improve your clarity and confidence.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Real-time NLP Feedback</h3>
+            <p>Using Natural Language Processing, we provide instant feedback on your tone, pacing, and vocabulary. Our AI detects if your answers are too short or too long, ensuring you strike the perfect balance during your interview.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-robot"></i></div>
+            <h3>Mock Interviews & Evaluation</h3>
+            <p>Practice with our virtual interviewer. Choose from a library of common interview questions and receive a comprehensive score based on your performance, including technical accuracy and communication skills.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Personalized Improvement Tips</h3>
+            <p>After each session, our AI generates a detailed report of your strengths and weaknesses. It provides actionable advice and custom exercises tailored to help you focus on the areas that need the most improvement.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-book-open"></i></div>
+            <h3>Comprehensive Question Library</h3>
+            <p>Access a vast and regularly updated database of interview questions for various industries and roles. From data structures to system design, we've got you covered.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+            <h3>Progress Tracking & Dashboards</h3>
+            <p>Monitor your improvement over time with our intuitive dashboard. Track your scores, review past interviews, and visualize your progress as you move closer to landing your dream job.</p>
+        </div>
+    </main>
+
+    <section class="cta-section">
+        <h2>Ready to Land Your Dream Job?</h2>
+        <p>Join thousands of successful candidates who used our platform to prepare for their interviews with confidence.</p>
+        <a href="dashboard.html" class="btn">Get Started Today</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 AI Interview Prep. All rights reserved.</p>
+    </footer>
+    
+</body>
+</html>

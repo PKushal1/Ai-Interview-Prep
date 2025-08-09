@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+         * Jarvis Style Guide: Creamy & Elegant
+         * A soft, clean design with smooth transitions and a refined color palette.
+         */
+
+        :root {
+            --primary-bg: #F8F0E3;
+            --accent-creamy: #C9A66B;
+            --text-dark: #332E2C;
+            --container-bg: #FFFFFF;
+            --border-radius: 8px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+            text-align: left;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            background: #F9F9F9;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box; /* to include padding in the width */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-creamy);
+            box-shadow: 0 0 0 2px rgba(201, 166, 107, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* --- Buttons --- */
+        .btn {
+            font-family: var(--font-body);
+            background: var(--accent-creamy);
+            color: var(--primary-bg);
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #B2915B; /* a slightly darker accent for hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>User Profile</h2>
+        <div class="profile-info">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="johndoe@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Bio:</label>
+                <textarea id="bio">I am an aspiring software engineer preparing for interviews.</textarea>
+            </div>
+
+            <h3>Update Password</h3>
+            <div class="form-group">
+                <label for="old-password">Old Password:</label>
+                <input type="password" id="old-password" placeholder="Enter old password">
+            </div>
+
+            <div class="form-group">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" placeholder="Enter new password">
+            </div>
+
+            <button class="btn" onclick="updateProfile()">Update Profile</button>
+        </div>
+    </div>
+
+    <script>
+        function updateProfile() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let bio = document.getElementById("bio").value;
+            let oldPassword = document.getElementById("old-password").value;
+            let newPassword = document.getElementById("new-password").value;
+
+            // Get stored password
+            let storedPassword = localStorage.getItem("userPassword");
+
+            // Check if old password is correct
+            if (oldPassword && oldPassword !== storedPassword) {
+                alert("Old password is incorrect.");
+                return;
+            }
+
+            // Validate new password length
+            if (newPassword && newPassword.length < 6) {
+                alert("New password must be at least 6 characters long.");
+                return;
+            }
+
+            // Save to localStorage (or send to backend)
+            localStorage.setItem("userName", name);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userBio", bio);
+            if (newPassword) {
+                localStorage.setItem("userPassword", newPassword);
+            }
+
+            alert("Profile updated successfully!");
+        }
+
+        // Load stored data on page load
+        window.onload = function() {
+            if (localStorage.getItem("userName")) {
+                document.getElementById("name").value = localStorage.getItem("userName");
+            }
+            if (localStorage.getItem("userEmail")) {
+                document.getElementById("email").value = localStorage.getItem("userEmail");
+            }
+            if (localStorage.getItem("userBio")) {
+                document.getElementById("bio").value = localStorage.getItem("userBio");
+            }
+            if (!localStorage.getItem("userPassword")) {
+                localStorage.setItem("userPassword", "123456"); // Default password for testing
+            }
+        }
+    </script>
+
+</body>
+</html>

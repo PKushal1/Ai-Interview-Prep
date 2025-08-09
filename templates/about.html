@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AI Interview Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+         * Jarvis Style Guide: Creamy & Elegant
+         * A soft, clean design with smooth transitions and a refined color palette.
+         */
+
+        :root {
+            --primary-bg: #F8F0E3;
+            --accent-creamy: #C9A66B;
+            --text-dark: #332E2C;
+            --container-bg: #FFFFFF;
+            --border-radius: 8px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* --- Header & Nav Bar --- */
+        header {
+            background: var(--container-bg);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+            color: var(--accent-creamy);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-creamy);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-creamy);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            font-family: var(--font-body);
+            background: var(--accent-creamy);
+            color: var(--primary-bg);
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #B2915B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Page Hero --- */
+        .page-hero {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 6vw, 4rem);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .page-hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Content Sections --- */
+        .content-section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .content-section h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-section p {
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* --- Team Section --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: var(--container-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            /* Center the content inside the card */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--accent-creamy);
+        }
+        
+        .team-member h4 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin: 0 0 5px;
+        }
+        
+        .team-member p {
+            font-style: italic;
+            color: var(--accent-creamy); /* Changed color for emphasis */
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Call to Action --- */
+        .cta-section {
+            padding: 80px 20px;
+            background: var(--container-bg);
+            margin-top: 50px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .cta-section p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-dark);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 20px;
+            background: var(--container-bg);
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+        
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI Interview Prep</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="login.html" class="btn">Login</a>
+        </nav>
+    </header>
+    
+    <section class="page-hero">
+        <h1>About Us</h1>
+        <p>Our story, our mission, and the dedicated team behind the AI Interview Prep platform.</p>
+    </section>
+    
+    <main>
+        <section class="content-section">
+            <h2>Our Mission</h2>
+            <p>At AI Interview Prep, we believe that everyone deserves a fair chance to land their dream job. We created this platform to democratize access to high-quality interview preparation tools. By leveraging the power of artificial intelligence, we provide a personalized and unbiased way for job seekers to practice their skills, receive constructive feedback, and build the confidence they need to succeed.</p>
+            <p>Our goal is to remove the guesswork from the interview process and equip you with the knowledge and composure to ace any challenge that comes your way.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Meet the Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="static/kushal.png" alt="P Kushal">
+                    <h4>P Kushal</h4>
+                    <p>Project Architect</p>
+                    <p>MCA Student, RNSIT</p>
+                </div>
+                <div class="team-member">
+                    <img src="static/vijeth.png" alt="Vijeth M">
+                    <h4>Vijeth M</h4>
+                    <p>Project Manager</p>
+
+            </div>
+        </section>
+    </main>
+
+    <section class="cta-section">
+        <h2>Join Our Community Today</h2>
+        <p>Ready to start your journey toward interview success? Our platform is waiting for you.</p>
+        <a href="dashboard.html" class="btn">Get Started Now</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 AI Interview Prep. All rights reserved.</p>
+    </footer>
+</body>
+</html>

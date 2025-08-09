@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Login - Jarvis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+         * Jarvis Style Guide: Creamy & Elegant
+         * A soft, clean design with smooth transitions and a refined color palette.
+         */
+
+        :root {
+            --primary-bg: #F8F0E3;
+            --accent-creamy: #C9A66B;
+            --text-dark: #332E2C;
+            --container-bg: #FFFFFF;
+            --border-radius: 8px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Container with a floating animation */
+        .container {
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            width: 350px;
+            transition: transform 0.5s ease-out, box-shadow 0.5s ease;
+            position: relative;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--accent-creamy);
+            margin-bottom: 25px;
+            transition: color 0.3s ease;
+        }
+
+        /* Forms and Inputs */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid #E0E0E0;
+            background: #FAFAFA;
+            color: var(--text-dark);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-creamy);
+            box-shadow: 0 0 5px rgba(201, 166, 107, 0.5);
+        }
+        
+        /* Submit Button */
+        button {
+            background: var(--accent-creamy);
+            color: var(--primary-bg);
+            padding: 14px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #B2915B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Toggle Links */
+        .toggle-link {
+            display: block;
+            margin-top: 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .toggle-link:hover {
+            color: var(--accent-creamy);
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+        
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form id="login-form" method="POST" action="/login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <a href="#" id="toggle-form" class="toggle-link">New user? Register here</a>
+        </form>
+        
+        <form id="register-form" class="hidden">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="reg-email" placeholder="Email" required>
+            <input type="password" id="reg-password" placeholder="Password" required>
+            <button type="submit">Register</button>
+            <a href="#" id="toggle-back" class="toggle-link">Already registered? Login here</a>
+        </form>
+    </div>
+    
+    <script>
+        // Switch between Login and Register Forms
+        document.getElementById('toggle-form').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+            document.getElementById('form-title').textContent = "Register";
+        });
+
+        document.getElementById('toggle-back').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('form-title').textContent = "Login";
+        });
+
+        // Fake register (no backend registration in current code)
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Registration feature not implemented in backend yet.');
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('form-title').textContent = "Login";
+        });
+    </script>
+</body>
+</html>

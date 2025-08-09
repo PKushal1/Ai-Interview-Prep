@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Interview Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        /*
+         * Jarvis Style Guide: Creamy & Elegant
+         * A soft, clean design with smooth transitions and a refined color palette.
+         */
+        :root {
+            --primary-bg: #F8F0E3;
+            --accent-creamy: #C9A66B;
+            --text-dark: #332E2C;
+            --container-bg: #FFFFFF;
+            --border-radius: 8px;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Header & Nav Bar --- */
+        header {
+            background: var(--container-bg);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+            color: var(--accent-creamy);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-creamy);
+        }
+
+        /* Underline hover effect */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-creamy);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            font-family: var(--font-body);
+            background: var(--accent-creamy);
+            color: var(--primary-bg);
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #B2915B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* --- Main Content --- */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            animation: fadeIn 0.8s ease-out;
+            text-align: left;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 5px;
+        }
+
+        /* --- Form & Buttons --- */
+        #questionForm {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            background: #F9F9F9;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-creamy);
+            box-shadow: 0 0 0 2px rgba(201, 166, 107, 0.3);
+        }
+
+        .form-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .form-buttons .btn {
+            flex-grow: 1;
+            width: auto;
+        }
+
+        .btn-stop {
+            background-color: #d9534f;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .btn-stop:hover {
+            background-color: #c9302c;
+        }
+
+        #loading {
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
+        #output {
+            min-height: 100px;
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        #transcribedAnswer {
+            font-style: italic;
+            color: #666;
+            margin-top: 0;
+        }
+
+        /* --- Video & Canvas --- */
+        #video-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 15px;
+        }
+        
+        canvas {
+            display: none;
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* --- Plotly Chart --- */
+        #plotlyResult {
+            background: #fff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+        }
+        
+        /* --- Media Queries for Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .form-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI Interview Prep</div>
+            <ul class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </ul>
+            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+        </nav>
+    </header>
+    
+    <main class="dashboard-container">
+        <h2>Your Practice Dashboard</h2>
+        
+        <div class="card">
+            <h3>Generate & Answer</h3>
+            <form id="questionForm">
+                <input type="text" name="topic" id="topic" placeholder="e.g. Python, SQL" required />
+                <div class="form-buttons">
+                    <button type="submit" id="generateBtn" class="btn">Generate Question</button>
+                    <button id="startRecording" type="button" class="btn">Start Recording Answer</button>
+                    <button id="stopRecording" type="button" class="btn btn-stop" disabled>Stop Recording</button>
+                </div>
+            </form>
+            <div id="loading" style="display:none">Generating question... Please wait.</div>
+        </div>
+
+        <div class="card">
+            <h3>Generated Question:</h3>
+            <pre id="output"></pre>
+
+            <h3>Your Answer:</h3>
+            <p id="transcribedAnswer"></p>
+        </div>
+
+        <div class="card">
+            <h3>Answer Evaluation</h3>
+            <div id="evaluationFeedback"></div>
+            <ul id="improvementList"></ul>
+
+            <div id="plotlyResult"></div>
+        </div>
+
+        <div class="card" id="video-section">
+            <h3>Camera Input</h3>
+            <video id="video" autoplay></video>
+            <button onclick="capturePhoto()" class="btn">Capture Photo</button>
+            <canvas id="canvas" style="display:none;"></canvas>
+        </div>
+    </main>
+    <script>
+        const output = document.getElementById("output");
+        const transcribedAnswer = document.getElementById("transcribedAnswer");
+        const loading = document.getElementById("loading");
+        const startBtn = document.getElementById("startRecording");
+        const stopBtn = document.getElementById("stopRecording");
+        const form = document.getElementById("questionForm");
+        const plotlyResult = document.getElementById("plotlyResult");
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+
+        let recognition;
+        let isRecording = false;
+        let isStopping = false;
+
+        // Initialize Speech Recognition
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = "en-US";
+
+            recognition.onstart = function() {
+                isRecording = true;
+                startBtn.textContent = "Recording...";
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+            };
+
+            recognition.onend = function() {
+                if (!isStopping) {
+                    recognition.start(); // Restart if not manually stopped
+                }
+                isRecording = false;
+            };
+
+            recognition.onresult = function(event) {
+                const text = event.results[event.results.length - 1][0].transcript;
+                transcribedAnswer.textContent += text + " ";
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                if (event.error === 'not-allowed') {
+                    alert("Microphone permission was denied. Please allow access to use this feature.");
+                }
+                isRecording = false;
+                startBtn.textContent = "Start Recording Answer";
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+            };
+
+        } else {
+            alert("Web Speech API is not supported in this browser. Please use Chrome.");
+            startBtn.disabled = true;
+            stopBtn.disabled = true;
+        }
+
+        async function generateQuestion() {
+            const topic = document.getElementById("topic").value.trim();
+
+            if (!topic) {
+                alert("Please enter a topic.");
+                return;
+            }
+
+            output.innerText = '';
+            transcribedAnswer.textContent = '';
+            loading.style.display = 'block';
+            plotlyResult.innerHTML = '';
+
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch("/generate", {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    output.innerText = data.question;
+                } else {
+                    output.innerText = `Error: ${data.error}`;
+                }
+            } catch (error) {
+                output.innerText = `Fetch error: ${error.message}`;
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            generateQuestion();
+        };
+
+        startBtn.onclick = function () {
+            if (!output.innerText.trim()) {
+                alert("Please generate a question first.");
+                return;
+            }
+
+            if (recognition && !isRecording) {
+                isStopping = false;
+                recognition.start();
+            }
+        };
+
+        stopBtn.onclick = function () {
+            if (recognition && isRecording) {
+                isStopping = true;
+                recognition.stop();
+
+                startBtn.textContent = "Start Recording Answer";
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+
+                const fullAnswer = transcribedAnswer.textContent;
+
+                fetch('/evaluate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_answer: fullAnswer })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        plotlyResult.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+                        return;
+                    }
+
+                    if (data && data.graph) {
+                        Plotly.newPlot("plotlyResult", data.graph.data, data.graph.layout);
+                    }
+
+                    // Show feedback summary
+                const evalDiv = document.getElementById("evaluationFeedback");
+                evalDiv.innerHTML = `<p><strong>Feedback:</strong> ${data.feedback_summary}</p>`;
+
+                // Show areas for improvement
+                const improvementList = document.getElementById("improvementList");
+                improvementList.innerHTML = "";
+                if (Array.isArray(data.areas_for_improvement)) {
+                    data.areas_for_improvement.forEach(point => {
+                        const li = document.createElement("li");
+                        li.textContent = point;
+                        improvementList.appendChild(li);
+                    });
+                }
+
+                // Render graph if available
+                if (data && data.graph) {
+                    Plotly.newPlot("plotlyResult", data.graph.data, data.graph.layout);
+                }
+
+                })
+                .catch(error => {
+                    plotlyResult.innerHTML = `<p style="color:red;">Evaluation failed. Server error.</p>`;
+                    console.error('Error during evaluation:', error);
+                });
+            }
+        };
+
+        // Camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Camera error:", err);
+                alert("Could not access camera. Please allow camera permissions.");
+            });
+
+        function capturePhoto() {
+            canvas.style.display = "block";
+            const ctx = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+        }
+    </script>
+</body>
+</html>
