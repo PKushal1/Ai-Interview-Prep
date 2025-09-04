@@ -3,7 +3,6 @@ dotenv
 google-generativeai
 opencv-python
 mediapipe==0.10.14
-python-3.10.13
 dlib
 scipy
 numpy
