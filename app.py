@@ -98,23 +98,23 @@ def generate_frames():
                b'Error: Could not access camera.\r\n')
         return
 
-    while True:
-        with camera_lock:
-            success, frame = camera.read()
+    # while True:
+    #     with camera_lock:
+    #         success, frame = camera.read()
 
-        if not success:
-            print("Warning: Failed to read frame from camera.")
-            time.sleep(1)
-            continue
+    #     if not success:
+    #         print("Warning: Failed to read frame from camera.")
+    #         time.sleep(1)
+    #         continue
         
-        processed_frame, activities = detect_suspicious_activity(frame)
-        latest_activity_flags.update(activities)
+    #     processed_frame, activities = detect_suspicious_activity(frame)
+    #     latest_activity_flags.update(activities)
         
-        ret, buffer = cv2.imencode('.jpg', processed_frame)
-        frame_bytes = buffer.tobytes()
+    #     ret, buffer = cv2.imencode('.jpg', processed_frame)
+    #     frame_bytes = buffer.tobytes()
 
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+    #     yield (b'--frame\r\n'
+    #            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 
 @app.route('/')
