@@ -2,7 +2,3 @@ Flask
 dotenv
 google-generativeai
 opencv-python
-mediapipe==0.10.14
-dlib
-scipy
-numpy
