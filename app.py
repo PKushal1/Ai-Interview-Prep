@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import cv2
 
-from suspicious_activity_detector import detect_suspicious_activity
 
 # Load environment variables from .env file
 load_dotenv()
